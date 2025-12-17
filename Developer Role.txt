@@ -1,0 +1,24 @@
+CREATE ROLE developer;
+
+GRANT CONNECT ON DATABASE astro,astro_ndd,astro_uat,ltp_uat,piper,svt_uat,tvt_main TO developer;
+
+GRANT USAGE ON SCHEMA public TO developer;
+GRANT SELECT,INSERT,UPDATE,DELETE ON ALL TABLES IN SCHEMA public TO developer;
+
+
+GRANT readaccess TO users;  --> secondary
+GRANT developer TO  users;  --> primary
+
+
+###########################  PRIMARY ############################
+
+
+CREATE ROLE developer;
+
+GRANT CONNECT ON DATABASE airflow,arrow,astro,astro_ndd_pc,hdaprodprim,svt,staging_boundary_manager TO developer;
+
+GRANT USAGE ON SCHEMA public TO developer;
+GRANT SELECT,INSERT,UPDATE,DELETE ON ALL TABLES IN SCHEMA public TO developer;
+
+
+GRANT developer TO read_user;
