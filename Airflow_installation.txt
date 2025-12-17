@@ -1,0 +1,224 @@
+Airflow
+#########################3
+
+svc_bia_prd_vision
+lecture90*PERMIT
+
+
+./configure --enable-optimizations
+
+make altinstall
+
+
+##############################3
+
+
+useradd airflow_admin
+ 
+passwd airflow_admin
+ 
+<type in a nice password><twice>
+create the admins group
+groupadd admins
+add user airflow to the admins group
+usermod -aG admins airflow_admin
+run visudo to allow the admins group to run the sudo command
+visudo
+ 
+%admins ALL=(ALL) NOPASSWD: ALL
+=====================
+
+Login as user airflow
+
+=====================
+
+##
+
+# create a virtual environment for airflow
+
+python -m venv airflow-env
+ 
+source airflow-env/bin/activate
+source airflow-env3/bin/activate
+ 
+cd airflow-env
+
+
+# Airflow needs a home. `~/airflow` is the default, but you can put it
+
+#
+# somewhere else if you prefer (optional)
+export AIRFLOW_HOME=/data/airflow
+
+
+# Install Airflow using the constraints file
+
+#
+#AIRFLOW_VERSION=2.10.2
+AIRFLOW_VERSION=3.0.2
+
+PYTHON_VERSION="$(python --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
+#
+# For example: 3.6
+CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
+ 
+pip install --upgrade pip
+ 
+# For example: https://raw.githubusercontent.com/apache/airflow/constraints-2.10.2/constraints-3.6.txt
+pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
+ 
+# Download sqlite from  https://www.sqlite.org/src/tarball/sqlite.tar.gz
+tar xzf sqlite.tar.gz
+cd sqlite
+export CFLAGS="-DSQLITE_ENABLE_FTS3 \
+     -DSQLITE_ENABLE_FTS3_PARENTHESIS \
+     -DSQLITE_ENABLE_FTS4 \
+     -DSQLITE_ENABLE_FTS5 \
+     -DSQLITE_ENABLE_JSON1 \
+     -DSQLITE_ENABLE_LOAD_EXTENSION \
+     -DSQLITE_ENABLE_RTREE \
+     -DSQLITE_ENABLE_STAT4 \
+     -DSQLITE_ENABLE_UPDATE_DELETE_LIMIT \
+     -DSQLITE_SOUNDEX \
+     -DSQLITE_TEMP_STORE=3 \
+     -DSQLITE_USE_URI \
+     -O2 \
+     -fPIC"
+
+postgresql+psycopg2://<user>:<password>@<host>/<db>
+
+postgresql+psycopg2://airflow_user:airflow_pass@ijaz.cd20kg0qyyaf.us-east-1.rds.amazonaws.com/airflow
+
+ 
+export PREFIX="/usr/local"
+ BS="-lm" ./configure --disable-tcl --enable-shared --enable-tempstore=always --prefix="$PREFIX"
+make
+make install
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH (add it in .bash_profile)
+
+
+######################### For Admin credentials follow the below steps ################
+
+pip install apache-airflow-providers-fab
+
+Edit your airflow.cfg file and set the following under the [core] section:
+auth_manager = airflow.providers.fab.auth_manager.fab_auth_manager.FabAuthManager
+
+ 
+airflow standalone
+or
+airflow db init
+nohup airflow webserver --port 8080 &
+nohup airflow api-server --port 8080 &
+nohup airflow scheduler &
+nohup airflow triggerer &
+nohup airflow dag-processor &
+airflow users create \
+    --username admin \
+    --firstname Peter \
+    --lastname Parker \
+    --role Admin \
+    --email spiderman@superhero.org
+
+
+airflow users create \
+    --username ijaz \
+    --firstname Peter1 \
+    --lastname Parker1 \
+    --role Admin \
+    --email spiderman1@superhero.org
+
+airflow users create \
+    --username mark \
+    --firstname marker1 \
+    --lastname whitfordr1 \
+    --role Admin \
+    --email spiderman11@superhero.org
+
+
+
+mount -o nouuid /dev/xvd44 /mnt
+mount -o nouuid /dev/xvdb /data
+
+#############33
+
+nohup airflow webserver --port 8080 &
+
+nohup airflow api-server --port 8080 &
+nohup airflow scheduler &
+nohup airflow dag-processor &
+nohup airflow triggerer &
+
+############# To install celery ################### 
+
+pip install apache-airflow[celery,redis]
+
+Edit your airflow.cfg file (usually in $AIRFLOW_HOME) and update these sections:
+executor = CeleryExecutor
+
+
+
+airflow webserver --daemon
+airflow scheduler --daemon
+airflow celery worker --daemon
+
+
+
+#################33
+
+
+From <https://airflow.apache.org/docs/apache-airflow/stable/start/local.html>
+
+------------------------------------------------------------------------------------
+
+Install rabbitmq-server
+
+
+# install RabbitMQ server on server
+ 
+# download erlang rpm
+ 
+# https://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
+sudo rpm -Uvh erlang-solutions-1.0-1.noarch.rpm
+sudo yum install erlang erlang-nox
+ 
+# download rabbitmq rpm
+# https://www.rabbitmq.com/releases/rabbitmq-server/v3.6.9/rabbitmq-server-3.6.9-1.el7.noarch.rpm
+ 
+# download key
+# https://www.rabbitmq.com/rabbitmq-release-signing-key.asc
+sudo yum install rabbitmq-server-3.6.9-1
+ 
+chgrp rabbitmq /etc/rabbitmq
+chmod g+s /etc/rabbitmq
+rm /etc/rabbitmq/enabled_plugins
+rabbitmq-plugins enable rabbitmq_management
+systemctl start rabbitmq-server
+ 
+# From <https://tecadmin.net/install-rabbitmq-on-centos/>
+ 
+sudo systemctl enable rabbitmq-server
+sudo systemctl start rabbitmq-server
+sudo systemctl stop rabbitmq-server
+ 
+# ------------ if it doesn't start
+systemctl start rabbitmq-server
+systemctl status rabbitmq-server.service
+systemctl status rabbitmq-server.service -l
+rm -rf /var/lib/rabbitmq/mnesia/*
+ls -ltr /var/lib/rabbitmq/mnesia/
+ 
+chgrp rabbitmq /etc/rabbitmq
+chmod g+s /etc/rabbitmq
+rm /etc/rabbitmq/enabled_plugins
+rabbitmq-plugins enable rabbitmq_management
+systemctl start rabbitmq-server
+ 
+ps auxww|grep rabbit
+rabbitmqctl status
+rabbitmqctl add_user airflow_user airflow_user
+rabbitmqctl set_user_tags airflow_user administrator
+rabbitmqctl add_vhost afvhost
+rabbitmqctl set_permissions -p afvhost airflow_user ".*" ".*" ".*"
+netstat|grep 5672
+lsof -i -P -n | grep LISTEN
