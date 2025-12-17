@@ -1,0 +1,28 @@
+java -version # Making sure terminal can identify JDK from PATH variable
+Windows: 
+
+java -cp agent.jar hudson.remoting.jnlp.Main -headless -workDir "E:\10_Jenkins99" -direct "jenkins-agent-gateway.nbnco.net.au:50099" -protocols JNLP4-connect -instanceIdentity "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu5jpPEfeWxGXlATxInovz/pram9Hlfbr/2WYKKv97ZpX1TAZe35z3Q/CE71btZxbk9E1g3TrrlCphvboUgc5w1vYW9H/IywvW5HmE+nKZOdXfo+mC88LsPyl3mYz8/YTk7XMksXDdzi9Hp9jJBivp1+BGpwz1n5ZMMKPBNuHL4wNWbWMwTDPVQ6EPWBRwpcnE5lkySTox8iU/jbvDChQjj6WYP1or9qjD6rueFtMDtiW9eQGslRgm/S/vf8sX13aFXcl0WVWH/V/Ck35fcU/YEyw4ecyqVPgipHhP7xpcwtyH66ywLcGeI1T5OsecdsjbmNY3oT47l/zRPJAuVjTQwIDAQAB" "8cd2635e75c1c2ea0e120918adced37e16675df55026b401c42ae0202746cabb" "PDC-159"
+
+java -cp agent.jar hudson.remoting.jnlp.Main -headless -workDir "E:\10_Jenkins99" -direct "jenkins-agent-gateway.nbnco.net.au:50099" -protocols JNLP4-connect -instanceIdentity "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu5jpPEfeWxGXlATxInovz/pram9Hlfbr/2WYKKv97ZpX1TAZe35z3Q/CE71btZxbk9E1g3TrrlCphvboUgc5w1vYW9H/IywvW5HmE+nKZOdXfo+mC88LsPyl3mYz8/YTk7XMksXDdzi9Hp9jJBivp1+BGpwz1n5ZMMKPBNuHL4wNWbWMwTDPVQ6EPWBRwpcnE5lkySTox8iU/jbvDChQjj6WYP1or9qjD6rueFtMDtiW9eQGslRgm/S/vf8sX13aFXcl0WVWH/V/Ck35fcU/YEyw4ecyqVPgipHhP7xpcwtyH66ywLcGeI1T5OsecdsjbmNY3oT47l/zRPJAuVjTQwIDAQAB" "e358960d576fe406fdd362ca982a0b7c5c5279491f1482a425ccd99f103a6d05" "PDC-110"
+
+
+java -cp agent.jar hudson.remoting.jnlp.Main -headless -workDir "D:\10_Jenkins99" -direct "jenkins-agent-gateway.nbnco.net.au:50099" -protocols JNLP4-connect -instanceIdentity "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu5jpPEfeWxGXlATxInovz/pram9Hlfbr/2WYKKv97ZpX1TAZe35z3Q/CE71btZxbk9E1g3TrrlCphvboUgc5w1vYW9H/IywvW5HmE+nKZOdXfo+mC88LsPyl3mYz8/YTk7XMksXDdzi9Hp9jJBivp1+BGpwz1n5ZMMKPBNuHL4wNWbWMwTDPVQ6EPWBRwpcnE5lkySTox8iU/jbvDChQjj6WYP1or9qjD6rueFtMDtiW9eQGslRgm/S/vf8sX13aFXcl0WVWH/V/Ck35fcU/YEyw4ecyqVPgipHhP7xpcwtyH66ywLcGeI1T5OsecdsjbmNY3oT47l/zRPJAuVjTQwIDAQAB" "d61044bea27a241af3064b510df4907edf8fc4c98be3aa4841c80babf8f58517" "PDC-"123
+
+sc create Jenkins99_node binPath= "E:\10_Jenkins99\jenkins-slave.exe"
+sc create Jenkins99_node binPath= "E:\10_Jenkins99\jenkins-slave.exe"
+
+sc delete Jenkins99_node binPath= "E:\10_Jenkins99\jenkins-slave.exe"
+
+###########################
+
+
+java -cp agent.jar hudson.remoting.jnlp.Main -headless -workDir "/var/jenkins" -direct "jenkins-agent-gateway.nbnco.net.au:50099" -protocols JNLP4-connect -instanceIdentity "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu5jpPEfeWxGXlATxInovz/pram9Hlfbr/2WYKKv97ZpX1TAZe35z3Q/CE71btZxbk9E1g3TrrlCphvboUgc5w1vYW9H/IywvW5HmE+nKZOdXfo+mC88LsPyl3mYz8/YTk7XMksXDdzi9Hp9jJBivp1+BGpwz1n5ZMMKPBNuHL4wNWbWMwTDPVQ6EPWBRwpcnE5lkySTox8iU/jbvDChQjj6WYP1or9qjD6rueFtMDtiW9eQGslRgm/S/vf8sX13aFXcl0WVWH/V/Ck35fcU/YEyw4ecyqVPgipHhP7xpcwtyH66ywLcGeI1T5OsecdsjbmNY3oT47l/zRPJAuVjTQwIDAQAB" "d61044bea27a241af3064b510df4907edf8fc4c98be3aa4841c80babf8f58517" "PDC-89"
+Linux:
+java -cp agent.jar hudson.remoting.jnlp.Main -headless -workDir "/var/jenkins" -direct "jenkins-agent-gateway.nbnco.net.au:50099" -protocols JNLP4-connect -instanceIdentity "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu5jpPEfeWxGXlATxInovz/pram9Hlfbr/2WYKKv97ZpX1TAZe35z3Q/CE71btZxbk9E1g3TrrlCphvboUgc5w1vYW9H/IywvW5HmE+nKZOdXfo+mC88LsPyl3mYz8/YTk7XMksXDdzi9Hp9jJBivp1+BGpwz1n5ZMMKPBNuHL4wNWbWMwTDPVQ6EPWBRwpcnE5lkySTox8iU/jbvDChQjj6WYP1or9qjD6rueFtMDtiW9eQGslRgm/S/vf8sX13aFXcl0WVWH/V/Ck35fcU/YEyw4ecyqVPgipHhP7xpcwtyH66ywLcGeI1T5OsecdsjbmNY3oT47l/zRPJAuVjTQwIDAQAB" "9005ab46b8e4109277314fba401bc461a2e7c9b15a778da08cdab21f93f6fb57" "PDC-15"
+
+
+####################
+When the script runs as var rather than bin we need to change it as below.
+semanage fcontext -a -t bin_t "/var/jenkins/jenkins-agent.sh"
+restorecon -v /var/jenkins/jenkins-agent.sh
+ls -lZ /var/jenkins/jenkins-agent.sh
